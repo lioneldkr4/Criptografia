@@ -1,0 +1,40 @@
+auto(juan).
+auto(josé).
+auto(jeremías).
+
+puede_caminar(aída).
+puede_caminar(analía).
+
+vive_lejos(roberto).
+vive_lejos(raúl).
+vive_lejos(rodrigo).
+vive_lejos(ana).
+vive_lejos(anacleta).
+vive_lejos(anastasia).
+
+conductor_seguro(josé).
+conductor_seguro(jeremías).
+
+amigos(anacleta, juan).
+amigos(anastasia, josé).
+amigos(roberto, jeremías).
+amigos(ana, josé).
+amigos(analía, juan).
+
+bebio_alcohol(juan).
+
+llega_seguro(X) :- puede_caminar(X).
+llega_seguro(X) :- auto(X), conductor_seguro(X).
+
+llega_seguro_con_amigo(X) :- 
+    vive_lejos(X),
+    amigos(X, Y),
+    auto(Y),
+    conductor_seguro(Y).
+
+
+% Consulta para obtener todos los que llegan seguros a casa solos
+?- llega_seguro(X).
+
+% Consulta para obtener todos los que llegan seguros a casa con ayuda
+?- llega_seguro_con_amigo(X).
