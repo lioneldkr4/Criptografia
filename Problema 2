@@ -1,0 +1,35 @@
+persona(barbara, femenino).
+persona(roberto, masculino).
+persona(susana, femenino).
+persona(juan, masculino).
+persona(maria, femenino).
+persona(pedro, masculino).
+
+amistad(barbara, roberto).
+amistad(susana, juan).
+amistad(barbara, juan).
+amistad(barbara, maria).
+amistad(susana, pedro).
+
+% a. Los hombres que tuvieron amistad con susana.
+sospechoso(X) :- 
+    persona(X, masculino),
+    amistad(susana, X).
+
+% b. Las mujeres que tuvieron relación con hombres que susana conocía.
+sospechoso(X) :- 
+    persona(X, femenino),
+    amistad(X, Y),
+    persona(Y, masculino),
+    amistad(susana, Y).
+
+% Los amigos de mujeres que tuvieron relación con hombres que susana conocía.
+sospechoso(X) :- 
+    amistad(X, Z),
+    persona(Z, femenino),
+    amistad(Z, Y),
+    persona(Y, masculino),
+    amistad(susana, Y).
+
+%Consulta
+?-sospechoso(X).
